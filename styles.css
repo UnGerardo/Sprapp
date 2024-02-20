@@ -43,11 +43,11 @@ input, hr, button {
   border: 1px solid black;
 }
 
-#add-deck-input {
+#add-deck-input, #card-front-input, #card-back-input {
   margin: 10px;
 }
 
-#deck-list {
+#deck-list, #card-list {
   border: 1px solid black;
   padding: 10px;
   margin: 10px;
@@ -55,12 +55,12 @@ input, hr, button {
   width: 400px;
 }
 
-#deck-list-meta, .deck {
+#deck-list-meta, #card-list-meta, .deck, .card {
   display: flex;
   justify-content: space-between;
 }
 
-#deck-list-body {
+#deck-list-body, #card-list-body {
   display: flex;
   flex-direction: column;
 }
