@@ -3,7 +3,7 @@ export let decks = [];
 
 import Deck from "../models/Deck";
 import Card from "../models/Card";
-import { loadDecks } from "./script";
+import { renderDecks } from "./script";
 
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const open = indexedDB.open('DeckDatabase', 1);
@@ -23,7 +23,7 @@ open.onsuccess = async function() {
   console.log("Database opened.");
 
   decks = await getDecks();
-  loadDecks(decks);
+  renderDecks(decks);
 }
 
 export function addDeck(deck) {
