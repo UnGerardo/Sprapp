@@ -23,7 +23,9 @@ open.onsuccess = async function() {
   console.log("Database opened.");
 
   decks = await getDecks();
-  renderDecks(decks);
+  if (window.location.href.includes('index')) {
+    renderDecks(decks);
+  }
 }
 
 export function addDeck(deck) {

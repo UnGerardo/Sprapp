@@ -1,3 +1,6 @@
+import { decks } from "./db.js";
+import Card from "../models/Card.js";
+
 const params = new URLSearchParams(window.location.search);
 const deckName = params.get('deckName');
 
@@ -8,33 +11,44 @@ const cardBackInput = document.getElementById('card-back-input');
 const addCardBtn = document.getElementById('add-card-btn');
 const cardListBody = document.getElementById('card-list-body');
 
-addCardBtn.addEventListener('click', () => {
-  const cardFrontText = cardFrontInput.value;
-  const cardBackText = cardBackInput.value;
-  cardFrontInput.value = '';
-  cardBackInput.value = '';
+if (addCardBtn) {
+  addCardBtn.addEventListener('click', () => {
+    const tomorrow = new Date();
+    // get PST time
+    tomorrow.setHours(tomorrow.getHours() - 8);
+    // set date to tomorrow and zero out hours, mins, secs, and millisecs
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0);
+    tomorrow.setMinutes(0);
+    tomorrow.setSeconds(0);
+    tomorrow.setMilliseconds(0);
 
-  const cardFrontDiv = document.createElement('div');
-  cardFrontDiv.innerText = cardFrontText;
-  const dueDiv = document.createElement('div');
-  dueDiv.innerText = 'Due';
+    const newCard = new Card({
+      front: cardFrontInput.value,
+      back: cardBackInput.value,
+      date: tomorrow,
+    });
+    cardFrontInput.value = '';
+    cardBackInput.value = '';
 
-  const newCardElement = document.createElement('div');
-  newCardElement.classList.add('card');
-  newCardElement.setAttribute('data-name', cardFrontText);
+    const cardFrontDiv = document.createElement('div');
+    cardFrontDiv.innerText = newCard.front;
+    const dueDiv = document.createElement('div');
 
-  newCardElement.appendChild(cardFrontDiv);
-  newCardElement.appendChild(dueDiv);
+    const newCardElement = document.createElement('div');
+    newCardElement.classList.add('card');
+    newCardElement.setAttribute('data-name', newCard.front);
 
-  cardListBody.appendChild(newCardElement);
+    newCardElement.appendChild(cardFrontDiv);
+    newCardElement.appendChild(dueDiv);
 
-  // const tomorrow = new Date();
-  // // get PST time
-  // tomorrow.setHours(tomorrow.getHours() - 8);
-  // // set date to tomorrow and zero out hours, mins, secs, and millisecs
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // tomorrow.setHours(0);
-  // tomorrow.setMinutes(0);
-  // tomorrow.setSeconds(0);
-  // tomorrow.setMilliseconds(0);
-});
+    cardListBody.appendChild(newCardElement);
+
+    for (let i = 0; i < decks.length; i++) {
+      if (decks[i].name === deckName) {
+        decks[i].addCard(newCard);
+        break;
+      }
+    }
+  });
+}
