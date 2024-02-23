@@ -1,3 +1,4 @@
+import { updateDeck } from "../js/db";
 
 export default class Deck {
   constructor({ name = '', cards = [] }) {
@@ -7,17 +8,16 @@ export default class Deck {
 
   changeName(name) {
     this.name = name;
+    updateDeck(this);
   }
 
   addCard(card) {
     this.cards.push(card);
-
-    return card.id === this.cards[this.cards.length - 1].id;
+    updateDeck(this);
   }
 
   removeCard(cardId) {
-    console.log(this.cards);
     this.cards = this.cards.filter(card => card.id !== cardId);
-    console.log(this.cards);
+    updateDeck(this);
   }
 }
