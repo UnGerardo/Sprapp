@@ -31,10 +31,11 @@ export function addDeck(deck) {
   t.onerror = tErrorEvent => console.log(`Error: ${tErrorEvent.target.error}`);
   const deckStore = t.objectStore('DeckStore');
 
-  deckStore.add(deck.forDatabase());
+  deckStore.add(deck);
 
   t.oncomplete = function() {
     console.log(`Deck: ${deck.name} added!`);
+    decks.push(deck);
   }
 }
 
@@ -59,7 +60,10 @@ export function deleteDeck(deckName) {
   const deckStore = t.objectStore('DeckStore');
   const delReq = deckStore.delete(deckName);
 
-  delReq.onsuccess = () => console.log(`Deck: ${deckName} deleted!`);
+  delReq.onsuccess = () => {
+    console.log(`Deck: ${deckName} deleted!`);
+    decks = decks.filter(deck => deck.name !== deckName);
+  }
   delReq.onerror = (errorEvent) => console.log(`Error in deletion: ${errorEvent.target.errorCode}`);
 }
 
