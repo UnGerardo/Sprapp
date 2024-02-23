@@ -43,6 +43,10 @@ input, hr, button {
   border: 1px solid black;
 }
 
+#deck-error {
+  color: red;
+}
+
 #add-deck-input, #card-front-input, #card-back-input {
   margin: 10px;
 }

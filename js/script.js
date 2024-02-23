@@ -1,12 +1,21 @@
-import { addDeck } from "./db.js";
+import { addDeck, decks } from "./db.js";
 import Deck from "../models/Deck.js";
 
 const addDeckInput = document.getElementById('add-deck-input');
 const addDeckBtn = document.getElementById('add-deck-btn');
 const deckListBody = document.getElementById('deck-list-body');
+const deckErrorSpan = document.getElementById('deck-error');
 
 if (addDeckBtn) {
   addDeckBtn.addEventListener('click', () => {
+    for (let i = 0; i < decks.length; i++) {
+      if (decks[i].name === addDeckInput.value) {
+        deckErrorSpan.hidden = false;
+        return;
+      }
+    }
+    deckErrorSpan.hidden = true;
+
     const newDeck = new Deck({ name: addDeckInput.value });
     addDeckInput.value = '';
 
