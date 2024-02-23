@@ -31,6 +31,17 @@ if (addCardBtn) {
 
     const cardFrontDiv = document.createElement('div');
     cardFrontDiv.innerText = newCard.front;
+
+    const cardBackDiv = document.createElement('div');
+    cardBackDiv.innerText = card.back;
+    cardBackDiv.hidden = true;
+    cardFrontDiv.addEventListener('mouseover', () => {
+      cardBackDiv.hidden = false;
+    });
+    cardFrontDiv.addEventListener('mouseleave', () => {
+      cardBackDiv.hidden = true;
+    });
+
     const dueDiv = document.createElement('div');
 
     const newCardElement = document.createElement('div');
@@ -57,6 +68,17 @@ export function renderCards(cards) {
 
     const cardFrontDiv = document.createElement('div');
     cardFrontDiv.innerText = card.front;
+
+    const cardBackDiv = document.createElement('div');
+    cardBackDiv.innerText = card.back;
+    cardBackDiv.hidden = true;
+    cardFrontDiv.addEventListener('mouseover', () => {
+      cardBackDiv.hidden = false;
+    });
+    cardFrontDiv.addEventListener('mouseleave', () => {
+      cardBackDiv.hidden = true;
+    });
+
     const dueDiv = document.createElement('div');
     if (card.date < now) {
       dueDiv.innerText = 'Due';
@@ -67,6 +89,7 @@ export function renderCards(cards) {
     newCardElement.setAttribute('data-name', card.front);
 
     newCardElement.appendChild(cardFrontDiv);
+    newCardElement.appendChild(cardBackDiv);
     newCardElement.appendChild(dueDiv);
 
     cardListBody.appendChild(newCardElement);
