@@ -33,7 +33,7 @@ if (addCardBtn) {
     cardFrontDiv.innerText = newCard.front;
 
     const cardBackDiv = document.createElement('div');
-    cardBackDiv.innerText = card.back;
+    cardBackDiv.innerText = newCard.back;
     cardBackDiv.hidden = true;
     cardFrontDiv.addEventListener('mouseover', () => {
       cardBackDiv.hidden = false;
@@ -49,6 +49,7 @@ if (addCardBtn) {
     newCardElement.setAttribute('data-name', newCard.front);
 
     newCardElement.appendChild(cardFrontDiv);
+    newCardElement.appendChild(cardBackDiv);
     newCardElement.appendChild(dueDiv);
 
     cardListBody.appendChild(newCardElement);
