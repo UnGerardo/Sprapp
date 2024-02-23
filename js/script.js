@@ -1,20 +1,21 @@
-import { decks, addDeck, updateDeck, getDecks } from "./db";
+import { decks, addDeck } from "./db";
+import Deck from "../models/Deck";
 
 const addDeckInput = document.getElementById('add-deck-input');
 const addDeckBtn = document.getElementById('add-deck-btn');
 const deckListBody = document.getElementById('deck-list-body');
 
 addDeckBtn.addEventListener('click', () => {
-  const newDeckName = addDeckInput.value;
+  const newDeck = { name: addDeckInput.value };
   addDeckInput.value = '';
 
   const newDeckElement = document.createElement('a');
   newDeckElement.classList.add('deck');
-  newDeckElement.setAttribute('data-name', newDeckName);
-  newDeckElement.setAttribute('href', `deck.html?deckName=${newDeckName}`);
+  newDeckElement.setAttribute('data-name', newDeck.name);
+  newDeckElement.setAttribute('href', `deck.html?deckName=${newDeck.name}`);
 
   const deckNameDiv = document.createElement('div');
-  deckNameDiv.innerText = newDeckName;
+  deckNameDiv.innerText = newDeck.name;
   const deckCardsDueDiv = document.createElement('div');
   deckCardsDueDiv.innerText = '0';
   const deckTotalCardsDiv = document.createElement('div');
@@ -24,6 +25,8 @@ addDeckBtn.addEventListener('click', () => {
   newDeckElement.appendChild(deckCardsDueDiv);
   newDeckElement.appendChild(deckTotalCardsDiv);
   deckListBody.appendChild(newDeckElement);
+
+  addDeck(newDeck);
 });
 
 // called in db.js after decks are retrieved, just need to render
