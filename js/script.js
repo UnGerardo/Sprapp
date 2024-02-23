@@ -1,12 +1,12 @@
-import { decks, addDeck } from "./db";
-import Deck from "../models/Deck";
+import { decks, addDeck } from "./db.js";
+import Deck from "../models/Deck.js";
 
 const addDeckInput = document.getElementById('add-deck-input');
 const addDeckBtn = document.getElementById('add-deck-btn');
 const deckListBody = document.getElementById('deck-list-body');
 
 addDeckBtn.addEventListener('click', () => {
-  const newDeck = { name: addDeckInput.value };
+  const newDeck = new Deck({ name: addDeckInput.value });
   addDeckInput.value = '';
 
   const newDeckElement = document.createElement('a');

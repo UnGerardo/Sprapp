@@ -1,9 +1,9 @@
 export let db = null;
 export let decks = [];
 
-import Deck from "../models/Deck";
-import Card from "../models/Card";
-import { renderDecks } from "./script";
+import Deck from "../models/Deck.js";
+import Card from "../models/Card.js";
+import { renderDecks } from "./script.js";
 
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const open = indexedDB.open('DeckDatabase', 1);
@@ -95,7 +95,7 @@ export async function getDecks() {
       reject(openCursorErrorEvent.target.error);
     }
 
-    transaction.onerror = transactionErrorEvent => {
+    t.onerror = transactionErrorEvent => {
       console.log(`Transaction Error: ${transactionErrorEvent.target.error}`);
       reject(transactionErrorEvent.target.error);
     }

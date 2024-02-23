@@ -1,4 +1,4 @@
-import { updateDeck } from "../js/db";
+import { updateDeck } from "../js/db.js";
 
 export default class Deck {
   constructor({ name = '', cards = [] }) {
