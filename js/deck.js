@@ -13,10 +13,8 @@ const cardListBody = document.getElementById('card-list-body');
 
 if (addCardBtn) {
   addCardBtn.addEventListener('click', () => {
-    const tomorrow = new Date();
-    // get PST time
-    tomorrow.setHours(tomorrow.getHours() - 8);
     // set date to tomorrow and zero out hours, mins, secs, and millisecs
+    const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(0);
     tomorrow.setMinutes(0);
@@ -50,5 +48,27 @@ if (addCardBtn) {
         break;
       }
     }
+  });
+}
+
+export function renderCards(cards) {
+  cards.forEach(card => {
+    const now = new Date();
+
+    const cardFrontDiv = document.createElement('div');
+    cardFrontDiv.innerText = card.front;
+    const dueDiv = document.createElement('div');
+    if (card.date < now) {
+      dueDiv.innerText = 'Due';
+    }
+
+    const newCardElement = document.createElement('div');
+    newCardElement.classList.add('card');
+    newCardElement.setAttribute('data-name', card.front);
+
+    newCardElement.appendChild(cardFrontDiv);
+    newCardElement.appendChild(dueDiv);
+
+    cardListBody.appendChild(newCardElement);
   });
 }

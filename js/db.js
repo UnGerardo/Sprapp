@@ -4,6 +4,7 @@ export let decks = [];
 import Deck from "../models/Deck.js";
 import Card from "../models/Card.js";
 import { renderDecks } from "./script.js";
+import { renderCards } from "./deck.js";
 
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const open = indexedDB.open('DeckDatabase', 1);
@@ -23,8 +24,19 @@ open.onsuccess = async function() {
   console.log("Database opened.");
 
   decks = await getDecks();
-  if (window.location.href.includes('index')) {
+  if (window.location.href.includes('index.html')) {
     renderDecks(decks);
+  }
+  else if (window.location.href.includes('deck.html')) {
+    const params = new URLSearchParams(window.location.search);
+    const deckName = params.get('deckName');
+
+    for (let i = 0; i < decks.length; i++) {
+      if (decks[i].name === deckName) {
+        renderCards(decks[i].cards);
+        break;
+      }
+    }
   }
 }
 
