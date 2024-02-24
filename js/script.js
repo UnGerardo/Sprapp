@@ -19,12 +19,12 @@ if (addDeckBtn) {
     const newDeck = new Deck({ name: addDeckInput.value });
     addDeckInput.value = '';
 
-    const newDeckElement = document.createElement('a');
+    const newDeckElement = document.createElement('div');
     newDeckElement.classList.add('deck');
     newDeckElement.setAttribute('data-name', newDeck.name);
-    newDeckElement.setAttribute('href', `deck.html?deckName=${newDeck.name}`);
 
-    const deckNameDiv = document.createElement('div');
+    const deckNameDiv = document.createElement('a');
+    deckNameDiv.setAttribute('href', `deck.html?deckName=${newDeck.name}`);
     deckNameDiv.innerText = newDeck.name;
     const deckCardsDueDiv = document.createElement('div');
     deckCardsDueDiv.innerText = '0';
@@ -43,12 +43,12 @@ if (addDeckBtn) {
 // called in db.js after decks are retrieved, just need to render
 export function renderDecks(decks) {
   decks.forEach(deck => {
-    const newDeckElement = document.createElement('a');
+    const newDeckElement = document.createElement('div');
     newDeckElement.classList.add('deck');
     newDeckElement.setAttribute('data-name', deck.name);
-    newDeckElement.setAttribute('href', `deck.html?deckName=${deck.name}`);
 
-    const deckNameDiv = document.createElement('div');
+    const deckNameDiv = document.createElement('a');
+    deckNameDiv.setAttribute('href', `deck.html?deckName=${deck.name}`);
     deckNameDiv.innerText = deck.name;
     const deckCardsDueDiv = document.createElement('div');
     deckCardsDueDiv.innerText = `${deck.cards.reduce((sum, card) => sum += card.date < new Date() ? 1 : 0, 0)}`;
