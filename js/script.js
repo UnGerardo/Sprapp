@@ -51,7 +51,7 @@ export function renderDecks(decks) {
     const deckNameDiv = document.createElement('div');
     deckNameDiv.innerText = deck.name;
     const deckCardsDueDiv = document.createElement('div');
-    deckCardsDueDiv.innerText = '0';
+    deckCardsDueDiv.innerText = `${deck.cards.reduce((sum, card) => sum += card.date < new Date() ? 1 : 0, 0)}`;
     const deckTotalCardsDiv = document.createElement('div');
     deckTotalCardsDiv.innerText = deck.cards.length;
 
