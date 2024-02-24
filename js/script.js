@@ -1,4 +1,4 @@
-import { addDeck, decks } from "./db.js";
+import { addDeck, decks, deleteDeck } from "./db.js";
 import Deck from "../models/Deck.js";
 
 const addDeckInput = document.getElementById('add-deck-input');
@@ -30,10 +30,17 @@ if (addDeckBtn) {
     deckCardsDueDiv.innerText = '0';
     const deckTotalCardsDiv = document.createElement('div');
     deckTotalCardsDiv.innerText = '0';
+    const deckDelBtn = document.createElement('button');
+    deckDelBtn.innerText = 'Delete';
+    deckDelBtn.addEventListener('click', function () {
+      deleteDeck(this.parentElement.getAttribute('data-name'));
+      newDeckElement.remove();
+    });
 
     newDeckElement.appendChild(deckNameDiv);
     newDeckElement.appendChild(deckCardsDueDiv);
     newDeckElement.appendChild(deckTotalCardsDiv);
+    newDeckElement.appendChild(deckDelBtn);
     deckListBody.appendChild(newDeckElement);
 
     addDeck(newDeck);
@@ -54,10 +61,17 @@ export function renderDecks(decks) {
     deckCardsDueDiv.innerText = `${deck.cards.reduce((sum, card) => sum += card.date < new Date() ? 1 : 0, 0)}`;
     const deckTotalCardsDiv = document.createElement('div');
     deckTotalCardsDiv.innerText = deck.cards.length;
+    const deckDelBtn = document.createElement('button');
+    deckDelBtn.innerText = 'Delete';
+    deckDelBtn.addEventListener('click', function () {
+      deleteDeck(this.parentElement.getAttribute('data-name'));
+      newDeckElement.remove();
+    });
 
     newDeckElement.appendChild(deckNameDiv);
     newDeckElement.appendChild(deckCardsDueDiv);
     newDeckElement.appendChild(deckTotalCardsDiv);
+    newDeckElement.appendChild(deckDelBtn);
     deckListBody.appendChild(newDeckElement);
   });
 }
