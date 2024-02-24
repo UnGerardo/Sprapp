@@ -44,13 +44,25 @@ if (addCardBtn) {
 
     const dueDiv = document.createElement('div');
 
+    const cardDelBtn = document.createElement('button');
+    cardDelBtn.innerText = 'Delete';
+    cardDelBtn.addEventListener('click', function () {
+      for (let i = 0; i < decks.length; i++) {
+        if (decks[i].name === deckName) {
+          decks[i].removeCard(this.parentElement.getAttribute('data-name'));
+        }
+      }
+      newCardElement.remove();
+    });
+
     const newCardElement = document.createElement('div');
     newCardElement.classList.add('card');
-    newCardElement.setAttribute('data-name', newCard.front);
+    newCardElement.setAttribute('data-name', newCard.id);
 
     newCardElement.appendChild(cardFrontDiv);
     newCardElement.appendChild(cardBackDiv);
     newCardElement.appendChild(dueDiv);
+    newCardElement.appendChild(cardDelBtn);
 
     cardListBody.appendChild(newCardElement);
 
@@ -85,13 +97,25 @@ export function renderCards(cards) {
       dueDiv.innerText = 'Due';
     }
 
+    const cardDelBtn = document.createElement('button');
+    cardDelBtn.innerText = 'Delete';
+    cardDelBtn.addEventListener('click', function () {
+      for (let i = 0; i < decks.length; i++) {
+        if (decks[i].name === deckName) {
+          decks[i].removeCard(this.parentElement.getAttribute('data-name'));
+        }
+      }
+      newCardElement.remove();
+    });
+
     const newCardElement = document.createElement('div');
     newCardElement.classList.add('card');
-    newCardElement.setAttribute('data-name', card.front);
+    newCardElement.setAttribute('data-name', card.id);
 
     newCardElement.appendChild(cardFrontDiv);
     newCardElement.appendChild(cardBackDiv);
     newCardElement.appendChild(dueDiv);
+    newCardElement.appendChild(cardDelBtn);
 
     cardListBody.appendChild(newCardElement);
   });
