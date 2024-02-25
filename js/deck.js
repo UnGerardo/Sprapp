@@ -11,7 +11,7 @@ const cardBackInput = document.getElementById('card-back-input');
 const addCardBtn = document.getElementById('add-card-btn');
 const cardListBody = document.getElementById('card-list-body');
 
-if (addCardBtn) {
+if (window.location.href.includes('deck.html')) {
   addCardBtn.addEventListener('click', () => {
     // set date to tomorrow and zero out hours, mins, secs, and millisecs
     const tomorrow = new Date();
@@ -50,6 +50,7 @@ if (addCardBtn) {
       for (let i = 0; i < decks.length; i++) {
         if (decks[i].name === deckName) {
           decks[i].removeCard(this.parentElement.getAttribute('data-name'));
+          break;
         }
       }
       newCardElement.remove();

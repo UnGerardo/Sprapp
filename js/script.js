@@ -6,7 +6,7 @@ const addDeckBtn = document.getElementById('add-deck-btn');
 const deckListBody = document.getElementById('deck-list-body');
 const deckErrorSpan = document.getElementById('deck-error');
 
-if (addDeckBtn) {
+if (window.location.href.includes('index.html')) {
   addDeckBtn.addEventListener('click', () => {
     for (let i = 0; i < decks.length; i++) {
       if (decks[i].name === addDeckInput.value) {
