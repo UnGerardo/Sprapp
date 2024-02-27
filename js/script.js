@@ -48,8 +48,10 @@ if (window.location.href.includes('index.html')) {
 }
 
 // called in db.js after decks are retrieved, just need to render
-export function renderDecks(decks) {
+export function renderDecks(decks, cards) {
   decks.forEach(deck => {
+    const associatedCards = cards.filter(card => card.deck === deck.name);
+
     const newDeckElement = document.createElement('div');
     newDeckElement.classList.add('deck');
     newDeckElement.setAttribute('data-name', deck.name);
@@ -57,10 +59,13 @@ export function renderDecks(decks) {
     const deckNameDiv = document.createElement('a');
     deckNameDiv.setAttribute('href', `deck.html?deckName=${deck.name}`);
     deckNameDiv.innerText = deck.name;
+
     const deckCardsDueDiv = document.createElement('div');
-    deckCardsDueDiv.innerText = `${deck.cards.reduce((sum, card) => sum += card.date < new Date() ? 1 : 0, 0)}`;
+    deckCardsDueDiv.innerText = `${associatedCards.reduce((sum, card) => sum += card.date < new Date() ? 1 : 0, 0)}`;
+
     const deckTotalCardsDiv = document.createElement('div');
-    deckTotalCardsDiv.innerText = deck.cards.length;
+    deckTotalCardsDiv.innerText = associatedCards.length;
+
     const deckDelBtn = document.createElement('button');
     deckDelBtn.innerText = 'Delete';
     deckDelBtn.addEventListener('click', function () {

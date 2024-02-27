@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Study</title>
+</head>
+<body>
+  <div><span id="cards-left"></span> cards left</div>
+  <div>Front: <span id="card-front"></span> <button id="reveal-back">Reveal</button></div>
+  <div>Back: <span id="card-back"></span></div>
+  <div id="ratings">
+    <button class="rating-btn" data-rating="5">5 - Perfect response</button>
+    <button class="rating-btn" data-rating="4">4 - Correct response after a hesitation</button>
+    <button class="rating-btn" data-rating="3">3 - Correct response recalled with serious difficulty</button>
+    <button class="rating-btn" data-rating="2">2 - Incorrect response; where the correct one seemed easy to recall</button>
+    <button class="rating-btn" data-rating="1">1 - Incorrect response; the correct one remembered</button>
+    <button class="rating-btn" data-rating="0">0 - Complete blackout</button>
+  </div>
+
+  <script type="module" src="../js/study.js"></script>
+</body>
+</html>

@@ -1,23 +1,13 @@
-import { updateDeck } from "../js/db.js";
+// import { updateDeck } from "../js/db.js";
 
 export default class Deck {
-  constructor({ name = '', cards = [] }) {
+  constructor({ name = '' } = {}) {
     this.name = name;
-    this.cards = cards;
   }
 
-  changeName(name) {
-    this.name = name;
-    updateDeck(this);
-  }
-
-  addCard(card) {
-    this.cards.push(card);
-    updateDeck(this);
-  }
-
-  removeCard(cardId) {
-    this.cards = this.cards.filter(card => card.id !== cardId);
-    updateDeck(this);
-  }
+  // changeName(name) {
+  //   this.name = name;
+  //   updateDeck(this);
+  //   TODO: go through each card that belongs to this deck and change its name to this new name
+  // }
 }
